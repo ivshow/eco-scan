@@ -9,7 +9,7 @@
 <template>
   <div>
     <v-nav-bar title="设备详情"></v-nav-bar>
-    <div class="v-p-10">
+    <div class="v-p-10" v-if="info.ID">
       <van-cell>
         <template #title>
           <span>编码:</span>
@@ -53,6 +53,7 @@
         </template>
       </van-cell>
     </div>
+    <van-empty description="暂无数据" v-else />
   </div>
 </template>
 

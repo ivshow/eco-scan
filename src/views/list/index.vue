@@ -9,20 +9,23 @@
 <template>
   <div>
     <v-nav-bar title="设备列表"></v-nav-bar>
-    <van-cell v-for="(item, index) in list" :key="index" is-link center :to="`/details?id=${item.QRcode}`">
-      <template #title>
-        <span>{{ index + 1 }}.</span>
-        <span>{{ item.QRcode }}</span>
-        <van-tag plain type="warning">{{ item.Status }}</van-tag>
-      </template>
-      <template #label>
-        <span>品牌: {{ item.MachineBrand }}</span>
-        <span>CPU: {{ item.MachineCPU }}</span>
-        <span>内存: {{ item.MachineMemory }}</span>
-        <span>硬盘: {{ item.MachineHDDType }}</span>
-        <span>硬盘容量: {{ item.MachineHDDSize }}</span>
-      </template>
-    </van-cell>
+    <template v-if="list.length">
+      <van-cell v-for="(item, index) in list" :key="index" is-link center :to="`/details?id=${item.QRcode}`">
+        <template #title>
+          <span>{{ index + 1 }}.</span>
+          <span>{{ item.QRcode }}</span>
+          <van-tag plain type="warning">{{ item.Status }}</van-tag>
+        </template>
+        <template #label>
+          <span>品牌: {{ item.MachineBrand }}</span>
+          <span>CPU: {{ item.MachineCPU }}</span>
+          <span>内存: {{ item.MachineMemory }}</span>
+          <span>硬盘: {{ item.MachineHDDType }}</span>
+          <span>硬盘容量: {{ item.MachineHDDSize }}</span>
+        </template>
+      </van-cell>
+    </template>
+    <van-empty description="暂无数据" v-else />
   </div>
 </template>
 
@@ -43,6 +46,7 @@ export default {
 .van-cell__title span {
   margin-right: 5px;
 }
+
 .van-cell__label {
   display: flex;
   flex-wrap: wrap;

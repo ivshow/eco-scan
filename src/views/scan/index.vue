@@ -31,9 +31,13 @@ export default {
     );
   },
   methods: {
+    /**
+     * @author: jaydon
+     * @description: 箱子: QRB开头， 设备: QRM开头
+     */
     onScanSuccess(text) {
-      const id = text.replace(/^QRM|-.*/g, '');
-      const path = ['N', 'M', 'D'].includes(id.charAt(0)) ? 'details' : 'list';
+      const id = text.replace(/^QRM|QRB|-.*/g, '');
+      const path = this.$startsWith(text, 'QRM') ? 'details' : 'list';
 
       this.html5QrCode.stop();
       this.$router.push(`/${path}?id=${id}`);
